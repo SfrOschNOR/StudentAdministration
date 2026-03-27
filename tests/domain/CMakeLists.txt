@@ -7,7 +7,8 @@ target_link_libraries(StudentAdministrationDomainTests PRIVATE
     GTest::gtest_main
 )
 student_administration_apply_defaults(StudentAdministrationDomainTests)
+student_administration_apply_sanitizers(StudentAdministrationDomainTests)
 student_administration_apply_clang_tidy(StudentAdministrationDomainTests)
 
 include(GoogleTest)
-gtest_discover_tests(StudentAdministrationDomainTests)
+gtest_discover_tests(StudentAdministrationDomainTests DISCOVERY_MODE PRE_TEST)

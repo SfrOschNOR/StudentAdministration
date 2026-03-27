@@ -67,7 +67,7 @@ The repository includes:
 - `.clang-format` for consistent C++ formatting
 - `.clang-tidy` for static analysis with modernize, bugprone and analyzer checks
 - `.clangd` for a better local IDE experience with clang-based tooling
-- `CMakePresets.json` with `dev`, `ci` and `analyze` presets
+- `CMakePresets.json` with `dev`, `ci`, `analyze` and `sanitizers` presets
 - CMake targets `format` and `format-check`
 
 Examples:
@@ -79,10 +79,15 @@ Examples:
 - `cmake --build --preset dev --target format-check`
 - `cmake --preset analyze`
 - `cmake --build --preset analyze`
+- `cmake --preset sanitizers`
+- `cmake --build --preset sanitizers`
+- `ctest --preset sanitizers`
 
 In CI, formatting is enforced for changed C++ files in pull requests, and the `ci`
-preset runs `clang-tidy` during compilation. The repository intentionally uses a
-strict `clang-tidy` baseline so new code is pushed toward modern C++ and cleaner design.
+preset runs `clang-tidy` during compilation. CI also runs the test suite under
+AddressSanitizer and UndefinedBehaviorSanitizer. The repository intentionally
+uses a strict `clang-tidy` baseline so new code is pushed toward modern C++ and
+cleaner design.
 
 ## Documentation
 
