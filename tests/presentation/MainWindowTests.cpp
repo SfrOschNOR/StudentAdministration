@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QString>
 
+#include <array>
 #include <memory>
 
 #include "student_administration/student_management/application/use_cases/ListStudentsUseCase.h"
@@ -24,14 +25,14 @@ class QApplicationEnvironment final : public ::testing::Environment {
         if (QApplication::instance() == nullptr) {
             qputenv("QT_QPA_PLATFORM", QByteArray("offscreen"));
             int argc = 1;
-            argvData_[0] = const_cast<char*>(appName_);
-            app_ = std::make_unique<QApplication>(argc, argvData_);
+            argvData_[0] = appName_.data();
+            app_ = std::make_unique<QApplication>(argc, argvData_.data());
         }
     }
 
     private:
-    const char* appName_ = "student-admin-tests";
-    char* argvData_[1]{};
+    std::array<char, 20> appName_{"student-admin-tests"};
+    std::array<char*, 1> argvData_{};
     std::unique_ptr<QApplication> app_;
 };
 
@@ -44,7 +45,7 @@ TEST(MainWindowTests, RegisteringStudentUpdatesListWidget) {
     infrastructure::persistence::InMemoryStudentRepository repository;
     application::use_cases::RegisterStudentUseCase registerStudentUseCase(repository);
     application::use_cases::ListStudentsUseCase listStudentsUseCase(repository);
-    MainWindow window(registerStudentUseCase, listStudentsUseCase);
+    const MainWindow window(registerStudentUseCase, listStudentsUseCase);
 
     auto* fullNameEdit = window.findChild<QLineEdit*>("fullNameEdit");
     auto* emailEdit = window.findChild<QLineEdit*>("emailEdit");
