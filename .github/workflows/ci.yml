@@ -16,22 +16,43 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install build dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            clang-format \
+            clang-tidy \
             cmake \
             g++ \
             ninja-build \
             pkg-config \
             qt6-base-dev
 
+      - name: Format check
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_REF="origin/${{ github.base_ref }}"
+            git fetch origin "${{ github.base_ref }}"
+          else
+            BASE_REF="$(git rev-list --max-parents=0 HEAD)"
+          fi
+          CHANGED_FILES="$(git diff --name-only "${BASE_REF}"...HEAD -- '*.h' '*.cpp')"
+          if [ -z "${CHANGED_FILES}" ]; then
+            echo "No changed C++ files to format-check."
+            exit 0
+          fi
+          echo "Checking formatting for:"
+          printf '%s\n' "${CHANGED_FILES}"
+          clang-format --dry-run --Werror ${CHANGED_FILES}
+
       - name: Configure
-        run: cmake -S . -B build -G Ninja -DBUILD_TESTING=ON
+        run: cmake --preset ci
 
       - name: Build
-        run: cmake --build build --parallel
+        run: cmake --build --preset ci --parallel
 
       - name: Run tests
-        run: ctest --test-dir build --output-on-failure
+        run: ctest --preset ci

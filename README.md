@@ -60,6 +60,27 @@ GoogleTest is downloaded automatically via `FetchContent`.
 GitHub Actions builds the project and runs the full test suite on every push to `main`
 and on every pull request.
 
+## Developer tooling
+
+The repository includes:
+
+- `.clang-format` for consistent C++ formatting
+- `.clang-tidy` for static analysis with modernize, bugprone and analyzer checks
+- `CMakePresets.json` with `dev` and `ci` presets
+- CMake targets `format` and `format-check`
+
+Examples:
+
+- `cmake --preset dev`
+- `cmake --build --preset dev`
+- `ctest --preset dev`
+- `cmake --build --preset dev --target format`
+- `cmake --build --preset dev --target format-check`
+
+In CI, formatting is enforced for changed C++ files in pull requests. `clang-tidy`
+is configured in the repository and can be enabled locally with
+`-DENABLE_CLANG_TIDY=ON` once the codebase is ready for stricter enforcement.
+
 ## Documentation
 
 GitHub Pages is prepared to publish the Doxygen HTML output generated from `Doxyfile`.
@@ -70,4 +91,4 @@ The `Docs` workflow builds and deploys the documentation site from `main`.
 1. Add a persistent repository with SQLite.
 2. Model a second aggregate such as `Course`.
 3. Introduce domain events for registration.
-4. Add CI, `clang-tidy` and formatting rules.
+4. Add architecture validation tests or dependency rules between modules.
