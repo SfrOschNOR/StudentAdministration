@@ -10,6 +10,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(ENABLE_CLANG_TIDY "Run clang-tidy during C++ compilation." OFF)
 option(ENABLE_CLANG_FORMAT_TARGETS "Add clang-format helper targets." ON)
+set(ENABLE_SANITIZERS "" CACHE STRING "Comma-separated sanitizers to enable, e.g. address,undefined.")
 
 find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
 find_package(GTest QUIET)
@@ -19,6 +20,8 @@ find_program(CLANG_FORMAT_BIN NAMES clang-format)
 
 add_library(StudentAdministrationWarnings INTERFACE)
 add_library(StudentAdministration::Warnings ALIAS StudentAdministrationWarnings)
+add_library(StudentAdministrationSanitizers INTERFACE)
+add_library(StudentAdministration::Sanitizers ALIAS StudentAdministrationSanitizers)
 
 target_compile_options(StudentAdministrationWarnings INTERFACE
     $<$<CXX_COMPILER_ID:Clang,GNU>:
@@ -40,8 +43,31 @@ target_compile_options(StudentAdministrationWarnings INTERFACE
     >
 )
 
+if(ENABLE_SANITIZERS)
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+        string(REPLACE "," ";" sanitizer_list "${ENABLE_SANITIZERS}")
+        list(JOIN sanitizer_list "," sanitizer_flags)
+
+        target_compile_options(StudentAdministrationSanitizers INTERFACE
+            -fsanitize=${sanitizer_flags}
+            -fno-omit-frame-pointer
+        )
+        target_link_options(StudentAdministrationSanitizers INTERFACE
+            -fsanitize=${sanitizer_flags}
+        )
+    else()
+        message(FATAL_ERROR "ENABLE_SANITIZERS is only supported with Clang or GCC.")
+    endif()
+endif()
+
 function(student_administration_apply_defaults target_name)
     target_link_libraries(${target_name} PRIVATE StudentAdministration::Warnings)
+endfunction()
+
+function(student_administration_apply_sanitizers target_name)
+    if(ENABLE_SANITIZERS)
+        target_link_libraries(${target_name} PRIVATE StudentAdministration::Sanitizers)
+    endif()
 endfunction()
 
 if(ENABLE_CLANG_TIDY)
@@ -83,6 +109,7 @@ target_link_libraries(StudentAdministration PRIVATE
     Qt::Widgets
 )
 student_administration_apply_defaults(StudentAdministration)
+student_administration_apply_sanitizers(StudentAdministration)
 student_administration_apply_clang_tidy(StudentAdministration)
 
 if(BUILD_TESTING)

@@ -45,4 +45,5 @@ target_link_libraries(StudentAdministrationPresentation
 )
 
 student_administration_apply_defaults(StudentAdministrationPresentation)
+student_administration_apply_sanitizers(StudentAdministrationPresentation)
 student_administration_apply_clang_tidy(StudentAdministrationPresentation)
