@@ -1,0 +1,22 @@
+Checks: >-
+  clang-analyzer-*,
+  bugprone-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers,
+  -readability-identifier-length,
+  -readability-convert-member-functions-to-static
+WarningsAsErrors: >-
+  clang-analyzer-*,
+  bugprone-*,
+  modernize-*,
+  performance-*
+HeaderFilterRegex: '^(src|tests)/.*'
+FormatStyle: file
+CheckOptions:
+  - key: readability-implicit-bool-conversion.AllowIntegerConditions
+    value: '1'
+  - key: modernize-use-nullptr.NullMacros
+    value: 'NULL'

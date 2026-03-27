@@ -6,8 +6,23 @@ include(FetchContent)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+option(ENABLE_CLANG_TIDY "Run clang-tidy during C++ compilation." OFF)
+option(ENABLE_CLANG_FORMAT_TARGETS "Add clang-format helper targets." ON)
+
 find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
 find_package(GTest QUIET)
+
+find_program(CLANG_TIDY_BIN NAMES clang-tidy)
+find_program(CLANG_FORMAT_BIN NAMES clang-format)
+
+if(ENABLE_CLANG_TIDY)
+    if(NOT CLANG_TIDY_BIN)
+        message(FATAL_ERROR "ENABLE_CLANG_TIDY is ON, but clang-tidy was not found.")
+    endif()
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_BIN}")
+endif()
 
 if(BUILD_TESTING AND NOT (GTest_FOUND OR TARGET GTest::gtest_main))
     FetchContent_Declare(
@@ -36,6 +51,30 @@ target_link_libraries(StudentAdministration PRIVATE
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
+endif()
+
+if(ENABLE_CLANG_FORMAT_TARGETS)
+    if(CLANG_FORMAT_BIN)
+        add_custom_target(format
+            COMMAND ${CMAKE_COMMAND}
+                -DCLANG_FORMAT_BIN=${CLANG_FORMAT_BIN}
+                -DPROJECT_SOURCE_DIR=${CMAKE_SOURCE_DIR}
+                -DMODE=apply
+                -P ${CMAKE_SOURCE_DIR}/cmake/RunClangFormat.cmake
+            COMMENT "Formatting C++ sources with clang-format"
+        )
+
+        add_custom_target(format-check
+            COMMAND ${CMAKE_COMMAND}
+                -DCLANG_FORMAT_BIN=${CLANG_FORMAT_BIN}
+                -DPROJECT_SOURCE_DIR=${CMAKE_SOURCE_DIR}
+                -DMODE=check
+                -P ${CMAKE_SOURCE_DIR}/cmake/RunClangFormat.cmake
+            COMMENT "Checking C++ formatting with clang-format"
+        )
+    else()
+        message(STATUS "clang-format was not found; 'format' targets will not be available.")
+    endif()
 endif()
 
 write_basic_package_version_file(
