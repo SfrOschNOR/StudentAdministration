@@ -1,5 +1,8 @@
 # Student Administration
 
+[![CI](https://github.com/SfrOschNOR/StudentAdministration/actions/workflows/ci.yml/badge.svg)](https://github.com/SfrOschNOR/StudentAdministration/actions/workflows/ci.yml)
+[![Docs](https://github.com/SfrOschNOR/StudentAdministration/actions/workflows/docs.yml/badge.svg)](https://github.com/SfrOschNOR/StudentAdministration/actions/workflows/docs.yml)
+
 This repository is a DDD and architecture learning project built with modern C++, Qt Widgets and GoogleTest.
 
 ## Current design
