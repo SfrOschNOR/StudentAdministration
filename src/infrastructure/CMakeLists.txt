@@ -35,3 +35,5 @@ target_link_libraries(StudentAdministrationInfrastructure
     PUBLIC
         StudentAdministration::Domain
 )
+
+student_administration_apply_defaults(StudentAdministrationInfrastructure)

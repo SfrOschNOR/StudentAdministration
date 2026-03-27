@@ -10,8 +10,7 @@ namespace student_administration::student_management::domain {
 
 TEST(StudentTests, RegisterNewCreatesActiveStudentWithGeneratedId) {
     const auto student = model::Student::registerNew(
-        value_objects::StudentName("Ada Lovelace"),
-        value_objects::EmailAddress("ada@example.com"));
+        value_objects::StudentName("Ada Lovelace"), value_objects::EmailAddress("ada@example.com"));
 
     EXPECT_FALSE(student.id().value().empty());
     EXPECT_EQ(student.name().value(), "Ada Lovelace");
@@ -20,9 +19,8 @@ TEST(StudentTests, RegisterNewCreatesActiveStudentWithGeneratedId) {
 }
 
 TEST(StudentTests, StudentCanBeDeactivated) {
-    auto student = model::Student::registerNew(
-        value_objects::StudentName("Barbara Liskov"),
-        value_objects::EmailAddress("barbara@example.com"));
+    auto student = model::Student::registerNew(value_objects::StudentName("Barbara Liskov"),
+                                               value_objects::EmailAddress("barbara@example.com"));
 
     student.deactivate();
 
@@ -38,4 +36,4 @@ TEST(StudentTests, InvalidEmailIsRejected) {
     EXPECT_THROW(value_objects::EmailAddress("invalid-email"), std::invalid_argument);
 }
 
-}  // namespace student_administration::student_management::domain
+} // namespace student_administration::student_management::domain

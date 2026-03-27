@@ -8,8 +8,8 @@
 namespace student_administration::student_management::domain::exceptions {
 
 class STUDENT_ADMINISTRATION_DOMAIN_EXPORT DomainException : public std::runtime_error {
-public:
+    public:
     explicit DomainException(const std::string& message);
 };
 
-}  // namespace student_administration::student_management::domain::exceptions
+} // namespace student_administration::student_management::domain::exceptions

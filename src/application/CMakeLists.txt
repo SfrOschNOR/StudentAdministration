@@ -39,3 +39,5 @@ target_link_libraries(StudentAdministrationApplication
     PUBLIC
         StudentAdministration::Domain
 )
+
+student_administration_apply_defaults(StudentAdministrationApplication)

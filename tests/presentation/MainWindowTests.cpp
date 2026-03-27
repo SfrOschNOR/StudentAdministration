@@ -19,7 +19,7 @@ namespace student_administration::student_management::presentation::qt {
 namespace {
 
 class QApplicationEnvironment final : public ::testing::Environment {
-public:
+    public:
     void SetUp() override {
         if (QApplication::instance() == nullptr) {
             qputenv("QT_QPA_PLATFORM", QByteArray("offscreen"));
@@ -29,7 +29,7 @@ public:
         }
     }
 
-private:
+    private:
     const char* appName_ = "student-admin-tests";
     char* argvData_[1]{};
     std::unique_ptr<QApplication> app_;
@@ -38,7 +38,7 @@ private:
 const ::testing::Environment* const qtEnvironment =
     ::testing::AddGlobalTestEnvironment(new QApplicationEnvironment());
 
-}  // namespace
+} // namespace
 
 TEST(MainWindowTests, RegisteringStudentUpdatesListWidget) {
     infrastructure::persistence::InMemoryStudentRepository repository;
@@ -64,4 +64,4 @@ TEST(MainWindowTests, RegisteringStudentUpdatesListWidget) {
     EXPECT_TRUE(studentList->item(0)->text().contains(QString("Alan Turing")));
 }
 
-}  // namespace student_administration::student_management::presentation::qt
+} // namespace student_administration::student_management::presentation::qt

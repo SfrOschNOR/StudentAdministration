@@ -11,13 +11,14 @@ namespace student_administration::student_management::infrastructure::persistenc
 
 class STUDENT_ADMINISTRATION_INFRASTRUCTURE_EXPORT InMemoryStudentRepository
     : public domain::repositories::StudentRepository {
-public:
+    public:
     void save(domain::model::Student student) override;
     [[nodiscard]] std::vector<domain::model::Student> findAll() const override;
-    [[nodiscard]] bool existsByEmail(const domain::value_objects::EmailAddress& email) const override;
+    [[nodiscard]] bool
+    existsByEmail(const domain::value_objects::EmailAddress& email) const override;
 
-private:
+    private:
     std::vector<domain::model::Student> students_;
 };
 
-}  // namespace student_administration::student_management::infrastructure::persistence
+} // namespace student_administration::student_management::infrastructure::persistence

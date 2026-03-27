@@ -7,6 +7,7 @@ target_link_libraries(StudentAdministrationPresentationTests PRIVATE
     StudentAdministration::Presentation
     GTest::gtest_main
 )
+student_administration_apply_defaults(StudentAdministrationPresentationTests)
 
 include(GoogleTest)
 gtest_discover_tests(StudentAdministrationPresentationTests)

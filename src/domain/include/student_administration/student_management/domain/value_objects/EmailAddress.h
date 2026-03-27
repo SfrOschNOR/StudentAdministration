@@ -7,13 +7,13 @@
 namespace student_administration::student_management::domain::value_objects {
 
 class STUDENT_ADMINISTRATION_DOMAIN_EXPORT EmailAddress {
-public:
+    public:
     explicit EmailAddress(std::string value);
 
     [[nodiscard]] const std::string& value() const noexcept;
 
-private:
+    private:
     std::string value_;
 };
 
-}  // namespace student_administration::student_management::domain::value_objects
+} // namespace student_administration::student_management::domain::value_objects

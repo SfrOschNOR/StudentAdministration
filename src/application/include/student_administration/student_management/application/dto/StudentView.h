@@ -13,4 +13,4 @@ struct STUDENT_ADMINISTRATION_APPLICATION_EXPORT StudentView {
     std::string status;
 };
 
-}  // namespace student_administration::student_management::application::dto
+} // namespace student_administration::student_management::application::dto

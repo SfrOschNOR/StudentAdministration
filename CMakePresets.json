@@ -25,7 +25,18 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "BUILD_TESTING": "ON",
-        "ENABLE_CLANG_TIDY": "OFF"
+        "ENABLE_CLANG_TIDY": "ON"
+      }
+    },
+    {
+      "name": "analyze",
+      "displayName": "Static analysis",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/analyze",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "BUILD_TESTING": "ON",
+        "ENABLE_CLANG_TIDY": "ON"
       }
     }
   ],
@@ -37,6 +48,10 @@
     {
       "name": "ci",
       "configurePreset": "ci"
+    },
+    {
+      "name": "analyze",
+      "configurePreset": "analyze"
     }
   ],
   "testPresets": [
@@ -50,6 +65,13 @@
     {
       "name": "ci",
       "configurePreset": "ci",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "analyze",
+      "configurePreset": "analyze",
       "output": {
         "outputOnFailure": true
       }

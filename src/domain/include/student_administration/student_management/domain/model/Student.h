@@ -16,7 +16,7 @@ enum class EnrollmentStatus {
 };
 
 class STUDENT_ADMINISTRATION_DOMAIN_EXPORT Student {
-public:
+    public:
     Student(value_objects::StudentId id,
             value_objects::StudentName name,
             value_objects::EmailAddress email,
@@ -33,11 +33,11 @@ public:
     [[nodiscard]] EnrollmentStatus status() const noexcept;
     [[nodiscard]] bool isActive() const noexcept;
 
-private:
+    private:
     value_objects::StudentId id_;
     value_objects::StudentName name_;
     value_objects::EmailAddress email_;
     EnrollmentStatus status_;
 };
 
-}  // namespace student_administration::student_management::domain::model
+} // namespace student_administration::student_management::domain::model

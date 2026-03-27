@@ -7,15 +7,15 @@
 namespace student_administration::student_management::domain::value_objects {
 
 class STUDENT_ADMINISTRATION_DOMAIN_EXPORT StudentId {
-public:
+    public:
     static StudentId generate();
 
     explicit StudentId(std::string value);
 
     [[nodiscard]] const std::string& value() const noexcept;
 
-private:
+    private:
     std::string value_;
 };
 
-}  // namespace student_administration::student_management::domain::value_objects
+} // namespace student_administration::student_management::domain::value_objects

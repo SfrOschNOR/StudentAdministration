@@ -17,7 +17,7 @@ std::string generateToken() {
     return stream.str();
 }
 
-}  // namespace
+} // namespace
 
 StudentId StudentId::generate() {
     return StudentId(generateToken());
@@ -33,4 +33,4 @@ const std::string& StudentId::value() const noexcept {
     return value_;
 }
 
-}  // namespace student_administration::student_management::domain::value_objects
+} // namespace student_administration::student_management::domain::value_objects

@@ -10,13 +10,13 @@
 namespace student_administration::student_management::application::use_cases {
 
 class STUDENT_ADMINISTRATION_APPLICATION_EXPORT RegisterStudentUseCase {
-public:
+    public:
     explicit RegisterStudentUseCase(domain::repositories::StudentRepository& repository);
 
     [[nodiscard]] dto::StudentView execute(const commands::RegisterStudentCommand& command) const;
 
-private:
+    private:
     domain::repositories::StudentRepository& repository_;
 };
 
-}  // namespace student_administration::student_management::application::use_cases
+} // namespace student_administration::student_management::application::use_cases

@@ -6,6 +6,7 @@ target_link_libraries(StudentAdministrationInfrastructureTests PRIVATE
     StudentAdministration::Infrastructure
     GTest::gtest_main
 )
+student_administration_apply_defaults(StudentAdministrationInfrastructureTests)
 
 include(GoogleTest)
 gtest_discover_tests(StudentAdministrationInfrastructureTests)

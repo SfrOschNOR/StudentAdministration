@@ -16,12 +16,12 @@ namespace student_administration::student_management::presentation::qt {
 class STUDENT_ADMINISTRATION_PRESENTATION_EXPORT MainWindow : public QMainWindow {
     Q_OBJECT
 
-public:
+    public:
     MainWindow(application::use_cases::RegisterStudentUseCase& registerStudentUseCase,
                application::use_cases::ListStudentsUseCase& listStudentsUseCase,
                QWidget* parent = nullptr);
 
-private:
+    private:
     void buildLayout();
     void wireEvents();
     void refreshStudentList();
@@ -36,4 +36,4 @@ private:
     QPushButton* addButton_{nullptr};
 };
 
-}  // namespace student_administration::student_management::presentation::qt
+} // namespace student_administration::student_management::presentation::qt

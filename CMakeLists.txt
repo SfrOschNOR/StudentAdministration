@@ -17,6 +17,33 @@ find_package(GTest QUIET)
 find_program(CLANG_TIDY_BIN NAMES clang-tidy)
 find_program(CLANG_FORMAT_BIN NAMES clang-format)
 
+add_library(StudentAdministrationWarnings INTERFACE)
+add_library(StudentAdministration::Warnings ALIAS StudentAdministrationWarnings)
+
+target_compile_options(StudentAdministrationWarnings INTERFACE
+    $<$<CXX_COMPILER_ID:Clang,GNU>:
+        -Wall
+        -Wextra
+        -Wpedantic
+        -Wconversion
+        -Wsign-conversion
+        -Wshadow
+        -Wundef
+        -Wdouble-promotion
+        -Wformat=2
+        -Werror
+    >
+    $<$<CXX_COMPILER_ID:MSVC>:
+        /W4
+        /WX
+        /permissive-
+    >
+)
+
+function(student_administration_apply_defaults target_name)
+    target_link_libraries(${target_name} PRIVATE StudentAdministration::Warnings)
+endfunction()
+
 if(ENABLE_CLANG_TIDY)
     if(NOT CLANG_TIDY_BIN)
         message(FATAL_ERROR "ENABLE_CLANG_TIDY is ON, but clang-tidy was not found.")
@@ -48,6 +75,7 @@ target_link_libraries(StudentAdministration PRIVATE
     StudentAdministration::Presentation
     Qt::Widgets
 )
+student_administration_apply_defaults(StudentAdministration)
 
 if(BUILD_TESTING)
     add_subdirectory(tests)

@@ -17,7 +17,7 @@ dto::StudentView toStudentView(const domain::model::Student& student) {
     };
 }
 
-}  // namespace
+} // namespace
 
 ListStudentsUseCase::ListStudentsUseCase(const domain::repositories::StudentRepository& repository)
     : repository_(repository) {}
@@ -30,4 +30,4 @@ std::vector<dto::StudentView> ListStudentsUseCase::execute() const {
     return students;
 }
 
-}  // namespace student_administration::student_management::application::use_cases
+} // namespace student_administration::student_management::application::use_cases

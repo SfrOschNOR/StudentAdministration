@@ -13,8 +13,8 @@ std::string trim(std::string value) {
         return std::isspace(character) != 0;
     });
     const auto last = std::find_if_not(value.rbegin(), value.rend(), [](unsigned char character) {
-        return std::isspace(character) != 0;
-    }).base();
+                          return std::isspace(character) != 0;
+                      }).base();
 
     if (first >= last) {
         return {};
@@ -25,7 +25,8 @@ std::string trim(std::string value) {
 
 bool isValidEmailAddress(const std::string& value) {
     const auto atPosition = value.find('@');
-    if (value.empty() || atPosition == std::string::npos || atPosition == 0 || atPosition == value.size() - 1) {
+    if (value.empty() || atPosition == std::string::npos || atPosition == 0 ||
+        atPosition == value.size() - 1) {
         return false;
     }
 
@@ -37,7 +38,7 @@ bool isValidEmailAddress(const std::string& value) {
     return dotPosition != std::string::npos && dotPosition < value.size() - 1;
 }
 
-}  // namespace
+} // namespace
 
 EmailAddress::EmailAddress(std::string value) : value_(trim(std::move(value))) {
     if (!isValidEmailAddress(value_)) {
@@ -49,4 +50,4 @@ const std::string& EmailAddress::value() const noexcept {
     return value_;
 }
 
-}  // namespace student_administration::student_management::domain::value_objects
+} // namespace student_administration::student_management::domain::value_objects

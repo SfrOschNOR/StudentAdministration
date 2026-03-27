@@ -36,4 +36,4 @@ bool Student::isActive() const noexcept {
     return status_ == EnrollmentStatus::Active;
 }
 
-}  // namespace student_administration::student_management::domain::model
+} // namespace student_administration::student_management::domain::model

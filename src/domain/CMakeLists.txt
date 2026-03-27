@@ -41,3 +41,5 @@ target_include_directories(StudentAdministrationDomain
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
+
+student_administration_apply_defaults(StudentAdministrationDomain)
