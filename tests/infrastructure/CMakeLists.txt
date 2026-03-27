@@ -1,8 +1,13 @@
-add_executable(StudentAdministrationInfrastructureTests InMemoryStudentRepositoryTests.cpp)
+add_executable(StudentAdministrationInfrastructureTests
+    InMemoryStudentRepositoryTests.cpp
+)
 
-    target_link_libraries(StudentAdministrationInfrastructureTests PRIVATE
-                              StudentAdministration::Infrastructure GTest::gtest_main)
-        student_administration_apply_defaults(StudentAdministrationInfrastructureTests)
-            student_administration_apply_clang_tidy(StudentAdministrationInfrastructureTests)
+target_link_libraries(StudentAdministrationInfrastructureTests PRIVATE
+    StudentAdministration::Infrastructure
+    GTest::gtest_main
+)
+student_administration_apply_defaults(StudentAdministrationInfrastructureTests)
+student_administration_apply_clang_tidy(StudentAdministrationInfrastructureTests)
 
-                include(GoogleTest) gtest_discover_tests(StudentAdministrationInfrastructureTests)
+include(GoogleTest)
+gtest_discover_tests(StudentAdministrationInfrastructureTests)

@@ -1,8 +1,13 @@
-add_executable(StudentAdministrationApplicationTests RegisterStudentUseCaseTests.cpp)
+add_executable(StudentAdministrationApplicationTests
+    RegisterStudentUseCaseTests.cpp
+)
 
-    target_link_libraries(StudentAdministrationApplicationTests PRIVATE
-                              StudentAdministration::Application GTest::gtest_main)
-        student_administration_apply_defaults(StudentAdministrationApplicationTests)
-            student_administration_apply_clang_tidy(StudentAdministrationApplicationTests)
+target_link_libraries(StudentAdministrationApplicationTests PRIVATE
+    StudentAdministration::Application
+    GTest::gtest_main
+)
+student_administration_apply_defaults(StudentAdministrationApplicationTests)
+student_administration_apply_clang_tidy(StudentAdministrationApplicationTests)
 
-                include(GoogleTest) gtest_discover_tests(StudentAdministrationApplicationTests)
+include(GoogleTest)
+gtest_discover_tests(StudentAdministrationApplicationTests)
