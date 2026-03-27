@@ -37,3 +37,4 @@ target_link_libraries(StudentAdministrationInfrastructure
 )
 
 student_administration_apply_defaults(StudentAdministrationInfrastructure)
+student_administration_apply_clang_tidy(StudentAdministrationInfrastructure)

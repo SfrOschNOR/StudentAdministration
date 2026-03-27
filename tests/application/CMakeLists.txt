@@ -7,6 +7,7 @@ target_link_libraries(StudentAdministrationApplicationTests PRIVATE
     GTest::gtest_main
 )
 student_administration_apply_defaults(StudentAdministrationApplicationTests)
+student_administration_apply_clang_tidy(StudentAdministrationApplicationTests)
 
 include(GoogleTest)
 gtest_discover_tests(StudentAdministrationApplicationTests)

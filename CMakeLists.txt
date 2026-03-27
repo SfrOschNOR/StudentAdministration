@@ -48,8 +48,15 @@ if(ENABLE_CLANG_TIDY)
     if(NOT CLANG_TIDY_BIN)
         message(FATAL_ERROR "ENABLE_CLANG_TIDY is ON, but clang-tidy was not found.")
     endif()
-    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_BIN}")
 endif()
+
+function(student_administration_apply_clang_tidy target_name)
+    if(ENABLE_CLANG_TIDY)
+        set_target_properties(${target_name} PROPERTIES
+            CXX_CLANG_TIDY "${CLANG_TIDY_BIN};--extra-arg-before=--driver-mode=g++"
+        )
+    endif()
+endfunction()
 
 if(BUILD_TESTING AND NOT (GTest_FOUND OR TARGET GTest::gtest_main))
     FetchContent_Declare(
@@ -76,6 +83,7 @@ target_link_libraries(StudentAdministration PRIVATE
     Qt::Widgets
 )
 student_administration_apply_defaults(StudentAdministration)
+student_administration_apply_clang_tidy(StudentAdministration)
 
 if(BUILD_TESTING)
     add_subdirectory(tests)

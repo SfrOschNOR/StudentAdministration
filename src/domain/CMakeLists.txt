@@ -43,3 +43,4 @@ target_include_directories(StudentAdministrationDomain
 )
 
 student_administration_apply_defaults(StudentAdministrationDomain)
+student_administration_apply_clang_tidy(StudentAdministrationDomain)
