@@ -6,7 +6,7 @@
 #include "student_administration/student_management/presentation/qt/MainWindow.h"
 
 int main(int argc, char* argv[]) {
-    QApplication app(argc, argv);
+    const QApplication app(argc, argv);
 
     using namespace student_administration::student_management;
 

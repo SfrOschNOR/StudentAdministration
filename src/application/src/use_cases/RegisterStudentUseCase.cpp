@@ -22,12 +22,13 @@ dto::StudentView toStudentView(const domain::model::Student& student) {
     };
 }
 
-}  // namespace
+} // namespace
 
 RegisterStudentUseCase::RegisterStudentUseCase(domain::repositories::StudentRepository& repository)
     : repository_(repository) {}
 
-dto::StudentView RegisterStudentUseCase::execute(const commands::RegisterStudentCommand& command) const {
+dto::StudentView
+RegisterStudentUseCase::execute(const commands::RegisterStudentCommand& command) const {
     const domain::value_objects::StudentName name(command.fullName);
     const domain::value_objects::EmailAddress email(command.email);
 
@@ -41,4 +42,4 @@ dto::StudentView RegisterStudentUseCase::execute(const commands::RegisterStudent
     return toStudentView(student);
 }
 
-}  // namespace student_administration::student_management::application::use_cases
+} // namespace student_administration::student_management::application::use_cases

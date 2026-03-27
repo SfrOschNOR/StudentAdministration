@@ -11,4 +11,4 @@ struct STUDENT_ADMINISTRATION_APPLICATION_EXPORT RegisterStudentCommand {
     std::string email;
 };
 
-}  // namespace student_administration::student_management::application::commands
+} // namespace student_administration::student_management::application::commands

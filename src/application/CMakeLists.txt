@@ -39,3 +39,6 @@ target_link_libraries(StudentAdministrationApplication
     PUBLIC
         StudentAdministration::Domain
 )
+
+student_administration_apply_defaults(StudentAdministrationApplication)
+student_administration_apply_clang_tidy(StudentAdministrationApplication)

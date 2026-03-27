@@ -13,8 +13,8 @@ std::string trim(std::string value) {
         return std::isspace(character) != 0;
     });
     const auto last = std::find_if_not(value.rbegin(), value.rend(), [](unsigned char character) {
-        return std::isspace(character) != 0;
-    }).base();
+                          return std::isspace(character) != 0;
+                      }).base();
 
     if (first >= last) {
         return {};
@@ -23,7 +23,7 @@ std::string trim(std::string value) {
     return std::string(first, last);
 }
 
-}  // namespace
+} // namespace
 
 StudentName::StudentName(std::string value) : value_(trim(std::move(value))) {
     if (value_.empty()) {
@@ -35,4 +35,4 @@ const std::string& StudentName::value() const noexcept {
     return value_;
 }
 
-}  // namespace student_administration::student_management::domain::value_objects
+} // namespace student_administration::student_management::domain::value_objects

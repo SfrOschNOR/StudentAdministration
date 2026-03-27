@@ -43,3 +43,6 @@ target_link_libraries(StudentAdministrationPresentation
         Qt::Gui
         Qt::Widgets
 )
+
+student_administration_apply_defaults(StudentAdministrationPresentation)
+student_administration_apply_clang_tidy(StudentAdministrationPresentation)

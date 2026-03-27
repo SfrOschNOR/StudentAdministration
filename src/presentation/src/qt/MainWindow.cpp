@@ -21,7 +21,7 @@ QString toDisplayString(const application::dto::StudentView& student) {
         .arg(QString::fromStdString(student.status));
 }
 
-}  // namespace
+} // namespace
 
 MainWindow::MainWindow(application::use_cases::RegisterStudentUseCase& registerStudentUseCase,
                        application::use_cases::ListStudentsUseCase& listStudentsUseCase,
@@ -58,14 +58,13 @@ void MainWindow::buildLayout() {
     auto* listGroup = new QGroupBox("Registered students", centralWidget);
     auto* listLayout = new QVBoxLayout(listGroup);
 
-    auto* hint = new QLabel(
-        "DDD learning setup:\n"
-        "- student_management is the bounded context\n"
-        "- domain owns model, value objects and repository contract\n"
-        "- application orchestrates use cases and returns DTOs\n"
-        "- infrastructure implements ports\n"
-        "- Qt stays in the presentation adapter",
-        listGroup);
+    auto* hint = new QLabel("DDD learning setup:\n"
+                            "- student_management is the bounded context\n"
+                            "- domain owns model, value objects and repository contract\n"
+                            "- application orchestrates use cases and returns DTOs\n"
+                            "- infrastructure implements ports\n"
+                            "- Qt stays in the presentation adapter",
+                            listGroup);
     hint->setWordWrap(true);
 
     studentList_ = new QListWidget(listGroup);
@@ -103,11 +102,10 @@ void MainWindow::registerStudent() {
         emailEdit_->clear();
         refreshStudentList();
         statusBar()->showMessage(
-            QString("Registered %1").arg(QString::fromStdString(registeredStudent.fullName)),
-            3000);
+            QString("Registered %1").arg(QString::fromStdString(registeredStudent.fullName)), 3000);
     } catch (const std::exception& exception) {
         QMessageBox::warning(this, "Registration failed", exception.what());
     }
 }
 
-}  // namespace student_administration::student_management::presentation::qt
+} // namespace student_administration::student_management::presentation::qt

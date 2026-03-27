@@ -66,7 +66,8 @@ The repository includes:
 
 - `.clang-format` for consistent C++ formatting
 - `.clang-tidy` for static analysis with modernize, bugprone and analyzer checks
-- `CMakePresets.json` with `dev` and `ci` presets
+- `.clangd` for a better local IDE experience with clang-based tooling
+- `CMakePresets.json` with `dev`, `ci` and `analyze` presets
 - CMake targets `format` and `format-check`
 
 Examples:
@@ -76,10 +77,12 @@ Examples:
 - `ctest --preset dev`
 - `cmake --build --preset dev --target format`
 - `cmake --build --preset dev --target format-check`
+- `cmake --preset analyze`
+- `cmake --build --preset analyze`
 
-In CI, formatting is enforced for changed C++ files in pull requests. `clang-tidy`
-is configured in the repository and can be enabled locally with
-`-DENABLE_CLANG_TIDY=ON` once the codebase is ready for stricter enforcement.
+In CI, formatting is enforced for changed C++ files in pull requests, and the `ci`
+preset runs `clang-tidy` during compilation. The repository intentionally uses a
+strict `clang-tidy` baseline so new code is pushed toward modern C++ and cleaner design.
 
 ## Documentation
 

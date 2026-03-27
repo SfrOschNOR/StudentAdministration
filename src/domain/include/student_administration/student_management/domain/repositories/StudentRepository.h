@@ -9,7 +9,7 @@
 namespace student_administration::student_management::domain::repositories {
 
 class STUDENT_ADMINISTRATION_DOMAIN_EXPORT StudentRepository {
-public:
+    public:
     virtual ~StudentRepository() = default;
 
     virtual void save(model::Student student) = 0;
@@ -17,4 +17,4 @@ public:
     [[nodiscard]] virtual bool existsByEmail(const value_objects::EmailAddress& email) const = 0;
 };
 
-}  // namespace student_administration::student_management::domain::repositories
+} // namespace student_administration::student_management::domain::repositories

@@ -10,7 +10,8 @@ std::vector<domain::model::Student> InMemoryStudentRepository::findAll() const {
     return students_;
 }
 
-bool InMemoryStudentRepository::existsByEmail(const domain::value_objects::EmailAddress& email) const {
+bool InMemoryStudentRepository::existsByEmail(
+    const domain::value_objects::EmailAddress& email) const {
     for (const auto& student : students_) {
         if (student.email().value() == email.value()) {
             return true;
@@ -19,4 +20,4 @@ bool InMemoryStudentRepository::existsByEmail(const domain::value_objects::Email
     return false;
 }
 
-}  // namespace student_administration::student_management::infrastructure::persistence
+} // namespace student_administration::student_management::infrastructure::persistence

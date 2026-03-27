@@ -24,10 +24,9 @@ TEST(InMemoryStudentRepositoryTests, ExistsByEmailReturnsTrueForStoredStudent) {
     const domain::value_objects::EmailAddress email("hedy@example.com");
 
     repository.save(domain::model::Student::registerNew(
-        domain::value_objects::StudentName("Hedy Lamarr"),
-        email));
+        domain::value_objects::StudentName("Hedy Lamarr"), email));
 
     EXPECT_TRUE(repository.existsByEmail(email));
 }
 
-}  // namespace student_administration::student_management::infrastructure::persistence
+} // namespace student_administration::student_management::infrastructure::persistence
