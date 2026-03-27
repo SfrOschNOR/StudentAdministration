@@ -1,14 +1,9 @@
-add_executable(StudentAdministrationPresentationTests
-    MainWindowTests.cpp
-)
+add_executable(StudentAdministrationPresentationTests MainWindowTests.cpp)
 
-target_link_libraries(StudentAdministrationPresentationTests PRIVATE
-    StudentAdministration::Infrastructure
-    StudentAdministration::Presentation
-    GTest::gtest_main
-)
-student_administration_apply_defaults(StudentAdministrationPresentationTests)
-student_administration_apply_clang_tidy(StudentAdministrationPresentationTests)
+    target_link_libraries(
+        StudentAdministrationPresentationTests PRIVATE StudentAdministration::Infrastructure
+            StudentAdministration::Presentation GTest::gtest_main)
+        student_administration_apply_defaults(StudentAdministrationPresentationTests)
+            student_administration_apply_clang_tidy(StudentAdministrationPresentationTests)
 
-include(GoogleTest)
-gtest_discover_tests(StudentAdministrationPresentationTests)
+                include(GoogleTest) gtest_discover_tests(StudentAdministrationPresentationTests)

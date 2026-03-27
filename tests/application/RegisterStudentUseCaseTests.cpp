@@ -11,7 +11,7 @@ namespace student_administration::student_management::application {
 namespace {
 
 class RecordingStudentRepository final : public domain::repositories::StudentRepository {
-public:
+    public:
     void save(domain::model::Student student) override {
         students_.push_back(std::move(student));
     }
@@ -30,7 +30,7 @@ public:
         return false;
     }
 
-private:
+    private:
     std::vector<domain::model::Student> students_;
 };
 
