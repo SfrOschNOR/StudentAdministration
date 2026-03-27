@@ -60,6 +60,11 @@ GoogleTest is downloaded automatically via `FetchContent`.
 GitHub Actions builds the project and runs the full test suite on every push to `main`
 and on every pull request.
 
+## Documentation
+
+GitHub Pages is prepared to publish the Doxygen HTML output generated from `Doxyfile`.
+The `Docs` workflow builds and deploys the documentation site from `main`.
+
 ## Suggested next steps
 
 1. Add a persistent repository with SQLite.
