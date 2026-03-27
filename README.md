@@ -77,6 +77,10 @@ Examples:
 - `cmake --build --preset dev --target format`
 - `cmake --build --preset dev --target format-check`
 
+In CI, formatting is enforced for changed C++ files in pull requests. `clang-tidy`
+is configured in the repository and can be enabled locally with
+`-DENABLE_CLANG_TIDY=ON` once the codebase is ready for stricter enforcement.
+
 ## Documentation
 
 GitHub Pages is prepared to publish the Doxygen HTML output generated from `Doxyfile`.

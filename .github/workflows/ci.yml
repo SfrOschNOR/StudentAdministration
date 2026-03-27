@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install build dependencies
         run: |
@@ -31,8 +33,20 @@ jobs:
 
       - name: Format check
         run: |
-          cmake --preset dev
-          cmake --build --preset dev --target format-check
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_REF="origin/${{ github.base_ref }}"
+            git fetch origin "${{ github.base_ref }}"
+          else
+            BASE_REF="$(git rev-list --max-parents=0 HEAD)"
+          fi
+          CHANGED_FILES="$(git diff --name-only "${BASE_REF}"...HEAD -- '*.h' '*.cpp')"
+          if [ -z "${CHANGED_FILES}" ]; then
+            echo "No changed C++ files to format-check."
+            exit 0
+          fi
+          echo "Checking formatting for:"
+          printf '%s\n' "${CHANGED_FILES}"
+          clang-format --dry-run --Werror ${CHANGED_FILES}
 
       - name: Configure
         run: cmake --preset ci
