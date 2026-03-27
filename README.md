@@ -55,6 +55,11 @@ Each module has its own GoogleTest project:
 The build first tries a locally installed GoogleTest package. If it is not available,
 GoogleTest is downloaded automatically via `FetchContent`.
 
+## Continuous integration
+
+GitHub Actions builds the project and runs the full test suite on every push to `main`
+and on every pull request.
+
 ## Suggested next steps
 
 1. Add a persistent repository with SQLite.
